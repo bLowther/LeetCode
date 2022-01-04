@@ -4,29 +4,21 @@
  * @return {string}
  */
 var convert = function(s, numRows) {
-  if (s.length <= numRows || numRows < 2) {
+  if (numRows === 1) {
     return s;
   }
-  let letterHolder = [];
+  let letterHolder = new Array(numRows).fill('');
   const count = numRows - 1;
   let up = true;
   for(i = 0; i < s.length; i++) {
-    let row = i % count;
+    let row = i % count
     if (row === 0) {
-      up = !up;
+      up = !up
     }
     if(up) {
-      if (letterHolder[count - row]) {
-        letterHolder[count - row] += s[i];
-      } else {
-        letterHolder[count - row] = s[i];
-      }
+      letterHolder[count - row] += s[i]
     } else {
-      if (letterHolder[row]) {
-        letterHolder[row] += s[i];
-      } else {
-        letterHolder[row] = s[i];
-      }  
+      letterHolder[row] += s[i]
     }
   }
   return letterHolder.reduce((x, y) => x + y)
