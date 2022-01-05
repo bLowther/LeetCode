@@ -2,22 +2,11 @@
  * @param {number} x
  * @return {number}
  */
-var reverse = function(x) {
-  let revString = '';
-  const string =  x.toString();
-  let neg = false;
-  if (x < 0) {
-    neg = true;
+const reverse = function(x) {
+  let sum = 0;
+  while (x !== 0) {
+    sum = sum * 10 + x % 10
+    x = Math.trunc(x / 10);
   }
-  for(let i = string.length - 1; i >= 0; i--) {
-    revString += string[i];
-  }
-  const result = Number.parseInt(revString)
-  if(-(2**31) >= result || result >= 2**31 - 1) {
-    return 0
-  }
-  if (neg) {
-    return -result;
-  }
-  return result;
+  return sum < -2147483648 || sum > 2147483647 ? 0 : sum;
 };
