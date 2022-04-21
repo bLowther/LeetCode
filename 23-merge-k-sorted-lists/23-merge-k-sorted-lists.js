@@ -9,20 +9,23 @@
  * @param {ListNode[]} lists
  * @return {ListNode}
  */
-const mergeKLists = function (lists) {
-	const queue = new MinPriorityQueue();
+var mergeKLists = function (lists) {
+	const array = [];
 	for (let i = 0; i < lists.length; i++) {
 		let head = lists[i];
 		while (head) {
-			queue.enqueue(head.val);
+			array.push(head.val);
 			head = head.next;
 		}
 	}
+
 	let list = new ListNode(0),
 		head = list;
-	while (queue.size()) {
-		const item = queue.dequeue();
-		head.next = new ListNode(item.element);
+
+	array.sort((a, b) => a - b);
+
+	for (let i = 0; i < array.length; i++) {
+		head.next = new ListNode(array[i]);
 		head = head.next;
 	}
 	return list.next;
